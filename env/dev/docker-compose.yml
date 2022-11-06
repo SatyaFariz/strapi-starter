@@ -1,11 +1,41 @@
-# path: ./docker-compose.yml
-
 version: '3'
+
 services:
-  strapi:
+  app:
+    container_name: strapi_app_dev
     build:
       context: .
       dockerfile: env/dev/Dockerfile
     env_file: env/dev/.env
+    restart: unless-stopped
     ports:
-      - '1337:1337'
+      - 1337:1337
+    networks:
+      - strapi
+    volumes:
+      - ./config:/opt/app/config
+      - ./src:/opt/app/src
+      - ./package.json:/opt/package.json
+      - ./.env:/opt/app/.env
+      - ./public/uploads:/opt/app/public/uploads
+      - /opt/app/node_modules/sharp/
+  
+  db:
+    container_name: strapi_db_dev
+    env_file: env/dev/.env
+    restart: unless-stopped
+    volumes:
+      - strapi-data:/var/lib/mysql
+      #- ./data:/var/lib/mysql # if you want to use a bind folder
+    ports:
+      - 3306:3306
+    networks:
+      - strapi
+
+volumes:
+  strapi-data:
+
+networks:
+  strapi:
+    name: Strapi
+    driver: bridge
