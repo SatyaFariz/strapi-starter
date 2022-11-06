@@ -7,7 +7,8 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "start:dev": "docker-compose -f docker-compose.yml -f env/dev/docker-compose.yml -p strapi_dev up --force-recreate"
   },
   "devDependencies": {},
   "dependencies": {

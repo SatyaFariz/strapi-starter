@@ -1,0 +1,11 @@
+# path: ./docker-compose.yml
+
+version: '3'
+services:
+  strapi:
+    build:
+      context: .
+      dockerfile: env/dev/Dockerfile
+    env_file: env/dev/.env
+    ports:
+      - '1337:1337'
