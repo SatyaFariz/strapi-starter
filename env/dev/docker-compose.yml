@@ -16,7 +16,8 @@ services:
       - ./config:/opt/app/config
       - ./src:/opt/app/src
       - ./package.json:/opt/package.json
-      - ./.env:/opt/app/.env
+      # - ./.env:/opt/app/.env
+      - ./env:/opt/app/env
       - ./public/uploads:/opt/app/public/uploads
       - /opt/app/node_modules/sharp/
   
